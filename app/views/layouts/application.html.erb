@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title><%= Settings.product_name %></title>
     <title>Skihlz</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,6 +12,8 @@
   </head>
 
   <body>
+    <%= render 'preorder/header' %>
     <%= yield %>
+    <%= render 'preorder/footer' %>
   </body>
 </html>
