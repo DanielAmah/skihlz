@@ -25,6 +25,8 @@ class Order < ApplicationRecord
       :upload => 1,
       :return => "http://localhost:3000/preorder",
       :rm => 2,
+      :invoice => options[:uuid],
+      :notify_url => options[:notify_url]
       }
 
       values.merge!({
