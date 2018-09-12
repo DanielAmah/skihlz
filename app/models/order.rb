@@ -18,6 +18,28 @@ class Order < ApplicationRecord
     @order
   end
 
+  def self.paypal_checkout!(options = {})
+    values = {
+      :business => "daniel_amah@gmail.com", #test email
+      :cmd => '_cart',
+      :upload => 1,
+      :return => "http://localhost:3000/preorder",
+      :rm => 2,
+      }
+
+      values.merge!({
+      "amount_1" => options[:price],
+      "item_name_1" => options[:name],
+      "item_number_1" =>  options[:uuid],
+      "quantity_1" => '1'
+      })
+
+      # This is a paypal sandbox url and should be changed for production.
+      # Better define this url in the application configuration setting on environment
+      # basis.
+      "https://www.sandbox.paypal.com/cgi-bin/webscr?" + values.to_query
+  end
+
 
   # After authenticating with Amazon, we get the rest of the details
   def self.postfill!(options = {})
