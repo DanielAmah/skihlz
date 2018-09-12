@@ -13,6 +13,9 @@
 
   <body>
     <%= render 'preorder/header' %>
+    <% if notice %>
+      <p><%= notice %></p>
+    <% end %>
     <%= yield %>
     <%= render 'preorder/footer' %>
   </body>

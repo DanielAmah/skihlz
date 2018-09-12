@@ -34,7 +34,7 @@ class PreorderController < ApplicationController
     #                                              :collect_shipping_address => "True",
     #                                              :payment_reason => Settings.payment_description)
 
-   redirect_to Order.paypal_checkout!(:name => Settings.product_name, :price => price, :uuid => @order.uuid, :notify_url => payment_notification_index_url)
+   redirect_to Order.paypal_checkout!(:name => Settings.product_name, :price => price, :uuid => @order.uuid, :return_url => preorder_url, :notify_url => payment_notification_index_url)
 
   end
 

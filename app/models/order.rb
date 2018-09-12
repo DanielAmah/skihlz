@@ -23,7 +23,7 @@ class Order < ApplicationRecord
       :business => "daniel_amah@gmail.com", #test email
       :cmd => '_cart',
       :upload => 1,
-      :return => "http://localhost:3000/preorder",
+      :return => options[:return_url],
       :rm => 2,
       :invoice => options[:uuid],
       :notify_url => options[:notify_url]
