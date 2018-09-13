@@ -3,7 +3,7 @@ class PaymentNotificationController < ApplicationController
 
   def create
     if PaymentNotification.create!(params: params, order_id: params[:invoice], status: params[:payment_status], transaction_id: params[:txn_id], amount: params[:payment_gross])
-      redirect_to preorder_path, notice: 'Notification created'
+      redirect_back(fallback_location: root_path)
     end
   end
 end
