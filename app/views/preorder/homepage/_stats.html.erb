@@ -21,7 +21,7 @@
     <ul>
       <li class="stats" id="backers">
         <%= number_with_delimiter Order.backers, :delimiter => "," %>
-        <span><%= Settings.primary_stat %></span>
+        <span><%= Order.backers.to_i > 1 ? Settings.primary_stat : Settings.primary_stat_verb %></span>
       </li>
       <li class="stats">
         <%= number_to_currency Order.revenue, :precision => 0 %>
@@ -40,7 +40,7 @@
           </li>
       <% end %>
     </ul>
-    
+
     <% if Order.revenue.to_f < Order.goal.to_f %>
       <div id='progress_bg' class='small'>
         <div id='progress' class='' style='width: <%= Order.percent %>%;'>
@@ -53,7 +53,7 @@
         <div id='progress_text'><%= Order.percent %>% <%= Settings.progress_text %></div>
       </div>
     <% end %>
-    
+
     <div id="reserve_container">
       <p id="ship_date"><%= Settings.ships %></p>
       <a href="/preorder/checkout" class="blue_button reserve"><%= Settings.call_to_action %></a>
@@ -61,7 +61,7 @@
       <p><%= Settings.dont_give_them_a_reason_to_say_no %></p>
       <%= like_button %>
     </div>
-    
+
   </div>
-  
+
 </div>

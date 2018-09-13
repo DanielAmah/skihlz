@@ -8,7 +8,7 @@ class PaymentNotification < ApplicationRecord
 
   def success_message
     if status == "Completed"
-      puts 'Completed'
+      order.update_attributes(completed: true, time_of_payment: Time.current)
     else
       puts 'error'
     end

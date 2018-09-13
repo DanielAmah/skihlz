@@ -2,7 +2,7 @@ class Order < ApplicationRecord
   before_validation :generate_uuid!, :on => :create
   belongs_to :user
   belongs_to :payment_option
-  scope :completed, -> { where("token != ? OR token != ?", "", nil) }
+  scope :completed, -> { where(completed: "true") }
   self.primary_key = 'uuid'
 
   # This is where we create our Caller Reference for Amazon Payments, and prefill some other information.
@@ -94,9 +94,9 @@ class Order < ApplicationRecord
 
   def self.revenue
     if Settings.use_payment_options
-      PaymentNotification.joins(:order).where(status: "Completed").pluck(:amount).map(&:to_f).inject(0, :+)
+      Order.where(completed: "true").pluck(:price).map(&:to_f).inject(0, :+)
     else
-      PaymentNotification.completed..pluck(:amount).map(&:to_f).inject(0, :+)
+      Order.completed.pluck(:price).map(&:to_f).inject(0, :+)
     end
   end
 
