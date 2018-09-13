@@ -94,9 +94,9 @@ class Order < ApplicationRecord
 
   def self.revenue
     if Settings.use_payment_options
-      PaymentOption.joins(:orders).where("token != ? OR token != ?", "", nil).pluck('sum(amount)')[0].to_f
+      PaymentNotification.joins(:order).where(status: "Completed").pluck(:amount).map(&:to_f).inject(0, :+)
     else
-      Order.completed.sum(:price).to_f
+      PaymentNotification.completed..pluck(:amount).map(&:to_f).inject(0, :+)
     end
   end
 

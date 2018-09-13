@@ -1,5 +1,6 @@
 class PaymentNotification < ApplicationRecord
   belongs_to :order
+  scope :completed, -> { where(status: "Completed") }
   serialize :params
   after_create :success_message
 
